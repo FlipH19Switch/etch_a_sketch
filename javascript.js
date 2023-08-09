@@ -8,10 +8,6 @@ Containers must share same styling and be interactive via hover
 
 const container = document.querySelector('#container');
 
-btn.addEventListener('click', () => {
-    createGrid()
-})
-
 function createGrid() {
     let gridSideLength = +prompt("How many squares per side would you like?", );
     
@@ -19,19 +15,39 @@ function createGrid() {
         gridSideLength = +prompt("That is too large. Please enter a maximum of 100 squares.", )
     }
     
-    // creates grid
-    for (let i = 0; i < Math.pow(gridSideLength,2); i++) {
-        const gridSquare = document.createElement('div');
-        gridSquare.classList.add('grid-square');
-        gridSquare.id = "grid-square";
-        container.appendChild(gridSquare);
+    // creates grid rows
+    for (let i = 0; i < gridSideLength; i++) {
+        const gridRow = document.createElement('div');
+        gridRow.classList.add('grid-row');
+        gridRow.id = 'grid-row';
+        container.appendChild(gridRow);
     }
 
-    // adds outline to parent div only after grid is created
-    container.classList.add('container');
+    const gridRowAll = document.querySelectorAll('#grid-row');
+    
+    // creates squares in each row
+    gridRowAll.forEach((gridRowSingle) => {
+        for (let j = 0; j < gridSideLength; j++) {
+            const gridSquare = document.createElement('div');
+            gridSquare.classList.add('grid-square');
+            gridSquare.id = 'grid-square';
+            gridRowSingle.appendChild(gridSquare);
+        }
+    })
 }
 
-
+btn.addEventListener('click', () => {
+    
+    // remove existing grid by removing rows
+    if(document.getElementById("grid-row")) {
+        const gridRowRemoveAll = document.querySelectorAll('#grid-row')
+        gridRowRemoveAll.forEach((gridRowRemoveSingle) => {
+            container.removeChild(gridRowRemoveSingle);
+        })
+    }
+    
+    createGrid()
+})
 
 // change background of hovered squares
 const hoveredSquares = document.querySelectorAll('#grid-square');
