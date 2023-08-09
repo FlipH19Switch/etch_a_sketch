@@ -1,11 +1,3 @@
-/*
-Make 16 x 16 = 256 unique containers within #container via Javascript
-Containers must have a 16 x 16 grid layout via Flexbox
-Containers must share same styling and be interactive via hover
-*/
-
-
-
 const container = document.querySelector('#container');
 
 function createGrid() {
@@ -36,14 +28,17 @@ function createGrid() {
     })
 
     // add container class after grid is created
-    container.classList.add('container')
+    container.classList.add('container');
 
     // change background of hovered squares
     // hover must be inside function in order to query id added inside function
     const hoveredSquares = document.querySelectorAll('#grid-square');
-    hoveredSquares.forEach(hoveredSquare => hoveredSquare.addEventListener('mouseover', () => {
-    hoveredSquare.classList.add('hover')
-}))
+    hoveredSquares.forEach(hoveredSquare => hoveredSquare.addEventListener('mouseover', (e) => {
+        let randomColorParam1 = Math.floor(Math.random()*255);
+        let randomColorParam2 = Math.floor(Math.random()*255);
+        let randomColorParam3 = Math.floor(Math.random()*255);
+        e.target.style.background = `RGB(${randomColorParam1},${randomColorParam2},${randomColorParam2})`
+    }))
 }
 
 
@@ -52,7 +47,7 @@ btn.addEventListener('click', () => {
     
     // remove existing grid by removing rows
     if(document.getElementById("grid-row")) {
-        const gridRowRemoveAll = document.querySelectorAll('#grid-row')
+        const gridRowRemoveAll = document.querySelectorAll('#grid-row');
         gridRowRemoveAll.forEach((gridRowRemoveSingle) => {
             container.removeChild(gridRowRemoveSingle);
         })
