@@ -34,7 +34,19 @@ function createGrid() {
             gridRowSingle.appendChild(gridSquare);
         }
     })
+
+    // add container class after grid is created
+    container.classList.add('container')
+
+    // change background of hovered squares
+    // hover must be inside function in order to query id added inside function
+    const hoveredSquares = document.querySelectorAll('#grid-square');
+    hoveredSquares.forEach(hoveredSquare => hoveredSquare.addEventListener('mouseover', () => {
+    hoveredSquare.classList.add('hover')
+}))
 }
+
+
 
 btn.addEventListener('click', () => {
     
@@ -48,9 +60,3 @@ btn.addEventListener('click', () => {
     
     createGrid()
 })
-
-// change background of hovered squares
-const hoveredSquares = document.querySelectorAll('#grid-square');
-hoveredSquares.forEach(hoveredSquare => hoveredSquare.addEventListener('mouseover', () => {
-    hoveredSquare.classList.add('hover')
-}))
